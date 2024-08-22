@@ -1,0 +1,37 @@
+#include "BluetoothSerial.h"
+BluetoothSerial SerialBT;
+char comando;
+void setup() {
+  Serial.begin(9600);
+  SerialBT.begin("Carrinho");
+
+
+  pinMode(23, OUTPUT);
+  
+  Serial.println("Fim Setup");
+  delay(2000);
+}
+void loop() {
+  if (SerialBT.available()) {
+    comando = SerialBT.read();
+  }
+
+
+  switch (comando) {
+    case 'F':
+      {  //move frente
+        Serial.printf("Frente \n");
+        digitalWrite(23, HIGH);
+        break;
+      }
+      case 'S':
+      {  //move frente
+        Serial.printf("Parado \n");
+        digitalWrite(23, LOW);
+        break;
+      }
+  }
+}
+
+
+
